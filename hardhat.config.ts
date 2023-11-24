@@ -1,7 +1,7 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@openzeppelin/hardhat-upgrades";
-import { FORKING_BLOCK_NUMMBER, INFURA_API_KEY, getNetworkConfig } from "./config";
+import { FORKING_BLOCK_NUMMBER, INFURA_API_KEY, apiKeys, getNetworkConfig } from "./config";
 
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
@@ -20,6 +20,15 @@ const config: HardhatUserConfig = {
     sepolia: getNetworkConfig("sepolia"),
     goerli: getNetworkConfig("goerli"),
     mumbai: getNetworkConfig("mumbai"),
+  },
+  etherscan: {
+    apiKey: {
+      mainnet: apiKeys.mainnet,
+      sepolia: apiKeys.sepolia,
+      goerli: apiKeys.goerli,
+      polygon: apiKeys.polygon,
+      polygonMumbai: apiKeys.polygonMumbai,
+    },
   },
   solidity: {
     version: "0.8.21",

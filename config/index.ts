@@ -16,20 +16,25 @@ if (!INFURA_API_KEY) {
 }
 
 export const FORKING_BLOCK_NUMMBER: number = 42369566;
-export const POLYGONSCAN_API_KEY: string = process.env.POLYGONSCAN_API_KEY || "";
-export const ETHERSCAN_API_KEY: string = process.env.ETHERSCAN_API_KEY || "";
+export const apiKeys: Record<string, string> = {
+  // Your API key for Etherscan
+  // Obtain one at https://etherscan.io/
+  mainnet: process.env.ETHERSCAN_API_KEY || "",
+  sepolia: process.env.ETHERSCAN_API_KEY || "",
+  goerli: process.env.ETHERSCAN_API_KEY || "",
+  polygon: process.env.POLYGONSCAN_API_KEY || "",
+  polygonMumbai: process.env.POLYGONSCAN_API_KEY || "",
+};
 
 interface networkConfig {
   chainId: number;
   rpcUrl: string;
-  live?: boolean;
 }
 
 const networksConfig: Record<string, networkConfig> = {
   mainnet: {
     chainId: 1,
     rpcUrl: `https://mainnet.infura.io/v3/${INFURA_API_KEY}`,
-    live: true,
   },
   sepolia: {
     chainId: 11155111,
@@ -42,7 +47,6 @@ const networksConfig: Record<string, networkConfig> = {
   polygon: {
     chainId: 137,
     rpcUrl: `https://polygon-mainnet.infura.io/v3/${INFURA_API_KEY}`,
-    live: true,
   },
   mumbai: {
     chainId: 80001,
