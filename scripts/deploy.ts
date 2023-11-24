@@ -1,26 +1,28 @@
-import { ethers } from "hardhat";
+import { ethers, hardhatArguments, upgrades } from "hardhat";
+import { Box__factory } from "../typechain-types";
+import { verify } from "../utils";
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
+  const [deployer] = await ethers.getSigners();
+  const { network } = hardhatArguments;
 
-  const lockedAmount = ethers.parseEther("0.001");
+  // Deploy the Box contract
+  const boxFactory: Box__factory = <Box__factory>await ethers.getContractFactory("Box");
+  const boxContract = await upgrades.deployProxy(boxFactory, [deployer.address], { initializer: "initialize" });
+  await boxContract.waitForDeployment();
 
-  const lock = await ethers.deployContract("Lock", [unlockTime], {
-    value: lockedAmount,
-  });
+  // Retrieve the Box contract address
+  const boxContractAddress = await boxContract.getAddress();
+  console.log("Box contract deployed to: ", boxContractAddress);
 
-  await lock.waitForDeployment();
-
-  console.log(
-    `Lock with ${ethers.formatEther(
-      lockedAmount
-    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
-  );
+  // Verify the Box contract implementation
+  if (network !== "localhost" && network !== undefined) {
+    console.log(`Sent for verification...`);
+    await verify(boxContractAddress, [deployer.address]);
+    console.log(`Successfully verified!`);
+  }
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
