@@ -1,7 +1,7 @@
 import { ethers, hardhatArguments, upgrades } from "hardhat";
-import { Box__factory } from "../typechain-types";
-import { addDeployment, delay, verify } from "../utils";
-import { networksConfig } from "../config";
+import { Box__factory } from "typechain-types";
+import { addDeployment, delay, verify } from "utils";
+import { networksConfig } from "config";
 
 async function main() {
   const [deployer] = await ethers.getSigners();
@@ -15,7 +15,7 @@ async function main() {
   const contract = await upgrades.deployProxy(factory, [deployer.address], { initializer: "initialize" });
   await contract.waitForDeployment();
 
-  // Retrieve the proxy contract address 
+  // Retrieve the proxy contract address
   const proxyAddress = await contract.getAddress();
   const implementationAddress = await upgrades.erc1967.getImplementationAddress(proxyAddress);
   console.log("Box proxy contract deployed at: ", proxyAddress);

@@ -1,8 +1,8 @@
 import { ethers, hardhatArguments, upgrades } from "hardhat";
-import { BoxV2__factory } from "../../typechain-types";
-import { verify } from "../../utils";
-import { deployments } from "../../config/deployments";
-import { networksConfig } from "../../config";
+import { BoxV2__factory } from "typechain-types";
+import { verify } from "utils";
+import { deployments } from "config/deployments";
+import { networksConfig } from "config";
 
 async function main() {
   const { network } = hardhatArguments;
