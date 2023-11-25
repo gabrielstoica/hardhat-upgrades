@@ -10,19 +10,19 @@ async function main() {
     throw new Error("Please specify the target network. Aborting...");
   }
 
-  // Deploy the Box proxy contract
-  const boxFactory: Box__factory = <Box__factory>await ethers.getContractFactory("Box");
-  const boxContract = await upgrades.deployProxy(boxFactory, [deployer.address], { initializer: "initialize" });
-  await boxContract.waitForDeployment();
+  // Deploy the proxy contract (i.e. Box)
+  const factory: Box__factory = <Box__factory>await ethers.getContractFactory("Box");
+  const contract = await upgrades.deployProxy(factory, [deployer.address], { initializer: "initialize" });
+  await contract.waitForDeployment();
 
-  // Retrieve the Box proxy contract address
-  const boxProxyAddress = await boxContract.getAddress();
-  const boxImplementationAddress = await upgrades.erc1967.getImplementationAddress(boxProxyAddress);
-  console.log("Box proxy contract deployed at: ", boxProxyAddress);
-  console.log("Box contract implementation deployed at: ", boxImplementationAddress);
+  // Retrieve the proxy contract address 
+  const proxyAddress = await contract.getAddress();
+  const implementationAddress = await upgrades.erc1967.getImplementationAddress(proxyAddress);
+  console.log("Box proxy contract deployed at: ", proxyAddress);
+  console.log("Box contract implementation deployed at: ", implementationAddress);
 
-  // Store the Box proxy contract address so we can use it later on
-  addDeployment(network!, boxProxyAddress);
+  // Store the proxy contract address so we can use it later on
+  addDeployment(network!, proxyAddress);
 
   // wait x seconds for transaction to be confirmed
   // before submitting for verification
@@ -30,12 +30,12 @@ async function main() {
   console.log(`Waiting ${ms / 1000} seconds before sending for verification...`);
   await delay(ms);
 
-  // Programmatically verify the Box proxy contract
+  // Programmatically verify the proxy contract
   // this will verify the implementation contract
   // and link the proxy contract with it
   if (networksConfig[network!].verifyContracts) {
     console.log(`Sent for verification...`);
-    await verify(boxProxyAddress);
+    await verify(proxyAddress);
     console.log(`Successfully verified!`);
   }
 }
