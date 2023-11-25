@@ -29,28 +29,41 @@ export const apiKeys: Record<string, string> = {
 interface networkConfig {
   chainId: number;
   rpcUrl: string;
+  verifyContracts: boolean;
 }
 
-const networksConfig: Record<string, networkConfig> = {
+export const networksConfig: Record<string, networkConfig> = {
   mainnet: {
     chainId: 1,
     rpcUrl: `https://mainnet.infura.io/v3/${INFURA_API_KEY}`,
+    verifyContracts: true,
   },
   sepolia: {
     chainId: 11155111,
     rpcUrl: `https://sepolia.infura.io/v3/${INFURA_API_KEY}`,
+    verifyContracts: true,
   },
   goerli: {
     chainId: 5,
     rpcUrl: `https://goerli.infura.io/v3/${INFURA_API_KEY}`,
+    verifyContracts: true,
   },
   polygon: {
     chainId: 137,
     rpcUrl: `https://polygon-mainnet.infura.io/v3/${INFURA_API_KEY}`,
+    verifyContracts: true,
   },
   mumbai: {
     chainId: 80001,
     rpcUrl: `https://polygon-mumbai.infura.io/v3/${INFURA_API_KEY}`,
+    verifyContracts: true,
+  },
+  localhost: {
+    chainId: 31337,
+    rpcUrl: "",
+    // keep it as false since contracts can't be verified
+    // on Hardhat localhost network
+    verifyContracts: false,
   },
 };
 
