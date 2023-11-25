@@ -1,10 +1,14 @@
 import { ethers, hardhatArguments, upgrades } from "hardhat";
 import { Box__factory } from "../typechain-types";
-import { delay, verify } from "../utils";
+import { addDeployment, delay, verify } from "../utils";
+import { networksConfig } from "../config";
 
 async function main() {
   const [deployer] = await ethers.getSigners();
   const { network } = hardhatArguments;
+  if (!network) {
+    throw new Error("Please specify the target network. Aborting...");
+  }
 
   // Deploy the Box proxy contract
   const boxFactory: Box__factory = <Box__factory>await ethers.getContractFactory("Box");
@@ -17,14 +21,19 @@ async function main() {
   console.log("Box proxy contract deployed at: ", boxProxyAddress);
   console.log("Box contract implementation deployed at: ", boxImplementationAddress);
 
-  // wait for transaction to be confirmed
+  // Store the Box proxy contract address so we can use it later on
+  addDeployment(network!, boxProxyAddress);
+
+  // wait x seconds for transaction to be confirmed
   // before submitting for verification
-  await delay(10000);
+  const ms = 20 * 1000; // milliseconds
+  console.log(`Waiting ${ms / 1000} seconds before sending for verification...`);
+  await delay(ms);
 
   // Programmatically verify the Box proxy contract
   // this will verify the implementation contract
   // and link the proxy contract with it
-  if (network !== "localhost" && network !== undefined) {
+  if (networksConfig[network!].verifyContracts) {
     console.log(`Sent for verification...`);
     await verify(boxProxyAddress);
     console.log(`Successfully verified!`);

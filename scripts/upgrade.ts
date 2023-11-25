@@ -1,10 +1,14 @@
 import { ethers, hardhatArguments, upgrades } from "hardhat";
 import { BoxV2__factory } from "../typechain-types";
-import { delay, verify } from "../utils";
+import { verify } from "../utils";
 import { deployments } from "../config/deployments";
+import { networksConfig } from "../config";
 
 async function main() {
   const { network } = hardhatArguments;
+  if (!network) {
+    throw new Error("Please specify the target network. Aborting...");
+  }
 
   // Upgrade the Box proxy contract to use the BoxV2 implementation contract
   const boxV2Factory: BoxV2__factory = <BoxV2__factory>await ethers.getContractFactory("BoxV2");
@@ -15,13 +19,9 @@ async function main() {
   const boxV2ImplementationAddress = await upgrades.erc1967.getImplementationAddress(boxV2ProxyAddress);
   console.log("BoxV2 contract implementation deployed at: ", boxV2ImplementationAddress);
 
-  // wait for transaction to be confirmed
-  // before submitting for verification
-  await delay(10000);
-  
   // Programmatically verify only the Box V2 contract implementation
   // since the proxy contract is already verified and linked with the old implementation
-  if (network !== "localhost" && network !== undefined) {
+  if (networksConfig[network!].verifyContracts) {
     console.log(`Sent for verification...`);
     await verify(boxV2ImplementationAddress);
     console.log(`Successfully verified!`);
