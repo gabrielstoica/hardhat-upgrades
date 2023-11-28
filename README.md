@@ -8,6 +8,13 @@ This project serves as boilerplate for getting started quickly working with UUPS
 - [@openzeppelin/defender-admin-client](https://www.npmjs.com/package/@openzeppelin/defender-admin-client): This library enables the programmatically creation of multisig proposals, adding an extra layer of security and control.
 - [@nomicfoundation/hardhat-verify](https://www.npmjs.com/package/@nomicfoundation/hardhat-verify): Allows to programmatically verify any contract on one of the supported chains.
 
+## References:
+
+- [Admin Accounts and Multisgs](https://blog.openzeppelin.com/admin-accounts-and-multisigs): why is important to take advantage of multisigs
+- [AccessControl documentatition](https://docs.openzeppelin.com/contracts/5.x/access-control): what is and how to integrate with AccessControle role-based mechanism
+- [Create a Gnosis Safe Multisig using Defender](https://www.youtube.com/watch?v=IOescPDrF7Y&ab_channel=OpenZeppelin): tutorial on how to create a secure multisig contract using OpenZeppelin Defender
+- [Deploying more efficient Upgradeable Contracts](https://www.youtube.com/watch?v=kWUDTZhxKZI&t=1846s&ab_channel=OpenZeppelin): how to deploy upgradeable contracts using the UUPS proxy pattern through the OpenZeppelin's tools
+
 ## Features
 
 This repository includes the following features:
