@@ -1,7 +1,7 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@openzeppelin/hardhat-upgrades";
-import { FORKING_BLOCK_NUMMBER, INFURA_API_KEY, apiKeys, getNetworkConfig } from "./config";
+import { FORKING_BLOCK_NUMMBER, INFURA_API_KEY, apiKeys, getNetworkConfig, networksConfig } from "./config";
 
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
@@ -10,7 +10,7 @@ const config: HardhatUserConfig = {
       chainId: 31337,
       // https://hardhat.org/hardhat-network/docs/guides/forking-other-networks
       forking: {
-        url: `https://goerli.infura.io/v3/${INFURA_API_KEY}`,
+        url: networksConfig["goerli"].rpcUrl,
         blockNumber: FORKING_BLOCK_NUMMBER,
         enabled: false,
       },
