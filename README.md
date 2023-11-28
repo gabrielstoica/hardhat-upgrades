@@ -6,17 +6,25 @@ This project serves as boilerplate for getting started quickly working with UUPS
 
 - [@openzeppelin/hardhat-upgrades](https://www.npmjs.com/package/@openzeppelin/hardhat-upgrades): A plugin that facilitates the management of smart contract upgrades in the Hardhat environment.
 - [@openzeppelin/defender-admin-client](https://www.npmjs.com/package/@openzeppelin/defender-admin-client): This library enables the programmatically creation of multisig proposals, adding an extra layer of security and control.
-- [@nomicfoundation/hardhat-verify](https://www.npmjs.com/package/@nomicfoundation/hardhat-verify): Allows to programmatically verify any contract on the supported chains
+- [@nomicfoundation/hardhat-verify](https://www.npmjs.com/package/@nomicfoundation/hardhat-verify): Allows to programmatically verify any contract on one of the supported chains.
 
 ## Features
 
-This repo includes the following features:
+This repository includes the following features:
 
 - **UUPS Upgradeability**: smart contracts templates based on the OpenZeppelin UUPS proxy mechanism.
 - **Ownable or AccessControl role-based multisig**: choose between an Ownable or AccessControl role-based approach for managing multisig contracts.
 - **Hardhat Upgrades Plugin**: streamline the smart contracts upgrade process using the hardhat-upgrades plugin.
 - **Defender Admin Client integration**: Enhance security with programmatically created multisig proposals using the defender-admin-client library.
 
+## Configuration
+
+All essential configurations for using this boilerplate are conveniently organized under the `config` folder:
+
+- `index.ts`: manage networks configurations by updating the `networksConfig` object. Add or remove chains effortlessly to tailor the boilerplate to your needs.
+- `deployments.ts`: serves as a central repository for all your deployments. Every deployment you perform will be automatically recorded by chain within this file for quick reference and tracking.
+- `multisigs.ts`: handle multisig contracts by updating the `multisigs` object. Add or remove multisig contract addresses by chain to adapt to your project's requirements.
+- `roles.ts`: AccessControl role management using the provided pattern under the `ROLES` object. Add or remove roles with ease, ensuring a streamlined approach to role-based access.
 
 ## Quick start
 
