@@ -23,7 +23,7 @@ This repository includes the following features:
 - [AccessControl documentatition](https://docs.openzeppelin.com/contracts/5.x/access-control): what is and how to integrate with AccessControle role-based mechanism
 - [Create a Gnosis Safe Multisig using Defender](https://www.youtube.com/watch?v=IOescPDrF7Y&ab_channel=OpenZeppelin): tutorial on how to create a secure multisig contract using OpenZeppelin Defender
 - [Deploying more efficient Upgradeable Contracts](https://www.youtube.com/watch?v=kWUDTZhxKZI&t=1846s&ab_channel=OpenZeppelin): how to deploy upgradeable contracts using the UUPS proxy pattern through the OpenZeppelin's tools
-- 
+  
 ## Configuration
 
 All essential configurations for using this boilerplate are conveniently organized under the `config` folder:
