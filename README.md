@@ -2,6 +2,15 @@
 
 This project serves as boilerplate for getting started quickly working with UUPS upgradeable smart contracts on a Hardhat environment.  It is based on the [OpenZeppelin UUPSUpgradeable proxy](https://docs.openzeppelin.com/contracts/5.x/api/proxy#UUPSUpgradeable) model enabling interaction with multisig contracts through either an Ownable or AccessControl role-based mechanism. It utilise the [@openzeppelin/hardhat-upgrades](https://www.npmjs.com/package/@openzeppelin/hardhat-upgrades) plugin to manage the upgrades and [@openzeppelin/defender-admin-client](https://www.npmjs.com/package/@openzeppelin/defender-admin-client) to programmatically create any multisig proposal.
 
+## Features
+
+This repository includes the following features:
+
+- **UUPS Upgradeability**: smart contracts templates based on the OpenZeppelin UUPS proxy mechanism.
+- **Ownable or AccessControl role-based multisig**: choose between an Ownable or AccessControl role-based approach for managing multisig contracts.
+- **Hardhat Upgrades Plugin**: streamline the smart contracts upgrade process using the hardhat-upgrades plugin.
+- **Defender Admin Client integration**: Enhance security with programmatically created multisig proposals using the defender-admin-client library.
+
 ## Key components:
 
 - [@openzeppelin/hardhat-upgrades](https://www.npmjs.com/package/@openzeppelin/hardhat-upgrades): A plugin that facilitates the management of smart contract upgrades in the Hardhat environment.
@@ -14,16 +23,7 @@ This project serves as boilerplate for getting started quickly working with UUPS
 - [AccessControl documentatition](https://docs.openzeppelin.com/contracts/5.x/access-control): what is and how to integrate with AccessControle role-based mechanism
 - [Create a Gnosis Safe Multisig using Defender](https://www.youtube.com/watch?v=IOescPDrF7Y&ab_channel=OpenZeppelin): tutorial on how to create a secure multisig contract using OpenZeppelin Defender
 - [Deploying more efficient Upgradeable Contracts](https://www.youtube.com/watch?v=kWUDTZhxKZI&t=1846s&ab_channel=OpenZeppelin): how to deploy upgradeable contracts using the UUPS proxy pattern through the OpenZeppelin's tools
-
-## Features
-
-This repository includes the following features:
-
-- **UUPS Upgradeability**: smart contracts templates based on the OpenZeppelin UUPS proxy mechanism.
-- **Ownable or AccessControl role-based multisig**: choose between an Ownable or AccessControl role-based approach for managing multisig contracts.
-- **Hardhat Upgrades Plugin**: streamline the smart contracts upgrade process using the hardhat-upgrades plugin.
-- **Defender Admin Client integration**: Enhance security with programmatically created multisig proposals using the defender-admin-client library.
-
+- 
 ## Configuration
 
 All essential configurations for using this boilerplate are conveniently organized under the `config` folder:
