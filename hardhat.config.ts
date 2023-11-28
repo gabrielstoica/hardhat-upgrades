@@ -1,7 +1,7 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@openzeppelin/hardhat-upgrades";
-import { FORKING_BLOCK_NUMMBER, INFURA_API_KEY, apiKeys, getNetworkConfig, networksConfig } from "./config";
+import { FORKING_BLOCK_NUMMBER, apiKeys, getNetworkConfig, networksConfig } from "./config";
 
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
