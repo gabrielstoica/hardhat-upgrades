@@ -27,12 +27,12 @@ async function main() {
   const contract = await ethers.getContractAt("MyToken", deployments[network]);
 
   // Grant the DEFAULT_ADMIN_ROLE role to a multisig contract address
-  // and await for the transaction to be mined
   console.log(`Granting the DEFAULT_ADMIN_ROLE to ${multisigAddress}...`);
   let tx = await contract.grantRole(role, multisigAddress);
   await tx.wait();
   console.log(`DEFAULT_ADMIN_ROLE successfully granted to ${multisigAddress}!`);
 
+  // Revoke the DEFAULT_ADMIN_ROLE role from the wallet address that deployed the contract
   console.log(`Revoking the DEFAULT_ADMIN_ROLE from ${deployer.address}...`);
   tx = await contract.revokeRole(ROLES.DEFAULT_ADMIN_ROLE, deployer.address);
   await tx.wait();
