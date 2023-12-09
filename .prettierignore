@@ -1,0 +1,14 @@
+node_modules
+artifacts
+cache
+config
+coverage*
+.env
+.*
+README.md
+coverage.json
+.DS_Store
+package.json
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
