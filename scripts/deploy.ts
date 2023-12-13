@@ -1,8 +1,14 @@
-import { ethers, hardhatArguments, upgrades } from "hardhat";
+import { defender, ethers, hardhatArguments } from "hardhat";
 import { Box__factory } from "typechain-types";
 import { addDeployment, delay, verify } from "utils";
 import { networksConfig } from "config";
 
+/**
+ * Use this script to deploy and verify a smart contract based on the UUPS proxy pattern
+ *
+ * For a step-by-step process follow the next link
+ * https://docs.openzeppelin.com/defender/v2/tutorial/deploy
+ */
 async function main() {
   const [deployer] = await ethers.getSigners();
   const { network } = hardhatArguments;
@@ -12,12 +18,12 @@ async function main() {
 
   // Deploy the proxy contract (i.e. Box)
   const factory: Box__factory = <Box__factory>await ethers.getContractFactory("Box");
-  const contract = await upgrades.deployProxy(factory, [deployer.address], { initializer: "initialize" });
+  const contract = await defender.deployProxy(factory, [deployer.address], { initializer: "initialize" });
   await contract.waitForDeployment();
 
   // Retrieve the proxy contract address
   const proxyAddress = await contract.getAddress();
-  const implementationAddress = await upgrades.erc1967.getImplementationAddress(proxyAddress);
+  const implementationAddress = await defender.erc1967.getImplementationAddress(proxyAddress);
   console.log("Box proxy contract deployed at: ", proxyAddress);
   console.log("Box contract implementation deployed at: ", implementationAddress);
 
