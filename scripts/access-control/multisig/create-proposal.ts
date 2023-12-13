@@ -1,5 +1,5 @@
 import { AdminClient } from "@openzeppelin/defender-admin-client";
-import { networksConfig } from "config";
+import { DEFENDER_API_KEY, DEFENDER_SECRET_KEY, networksConfig } from "config";
 import { deployments } from "config/deployments";
 import { multisigs } from "config/multisigs";
 import { ethers, hardhatArguments } from "hardhat";
@@ -18,13 +18,6 @@ async function main() {
   }
   const [deployer] = await ethers.getSigners();
 
-  // Check for the OpenZeppelin Defender API Keys
-  const defenderApiKey = process.env.DEFENDER_KEY;
-  const defenderApiSecret = process.env.DEFENDER_SECRET;
-  if (!defenderApiKey || !defenderApiSecret) {
-    throw new Error("Defender API Keys must be provided. Aborting...");
-  }
-
   // Configuration
   // Get the multisig contract address that must approve this proposal
   const multisigAddress = multisigs[network].MINTER_ROLE;
@@ -34,7 +27,7 @@ async function main() {
   const defenderNetwork = networksConfig[network].defenderId;
 
   // Create the Defender Admin Client instance
-  const client = new AdminClient({ apiKey: defenderApiKey, apiSecret: defenderApiSecret });
+  const client = new AdminClient({ apiKey: DEFENDER_API_KEY, apiSecret: DEFENDER_SECRET_KEY });
 
   // Create the proposal through the Defender Admin Client
   const proposal = await client.createProposal({
