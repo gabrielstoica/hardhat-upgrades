@@ -1,7 +1,14 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@openzeppelin/hardhat-upgrades";
-import { FORKING_BLOCK_NUMMBER, apiKeys, getNetworkConfig, networksConfig } from "./config";
+import {
+  DEFENDER_API_KEY,
+  DEFENDER_SECRET_KEY,
+  FORKING_BLOCK_NUMMBER,
+  apiKeys,
+  getNetworkConfig,
+  networksConfig,
+} from "./config";
 
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
@@ -20,6 +27,10 @@ const config: HardhatUserConfig = {
     sepolia: getNetworkConfig("sepolia"),
     goerli: getNetworkConfig("goerli"),
     mumbai: getNetworkConfig("mumbai"),
+  },
+  defender: {
+    apiKey: DEFENDER_API_KEY,
+    apiSecret: DEFENDER_SECRET_KEY,
   },
   etherscan: {
     apiKey: {

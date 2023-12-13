@@ -15,6 +15,16 @@ if (!INFURA_API_KEY) {
   throw new Error("Infura API Key is missing from the .env file. Aborting...");
 }
 
+export const DEFENDER_API_KEY: string = process.env.DEFENDER_API_KEY || "";
+if (!DEFENDER_API_KEY) {
+  throw new Error("Defender API Key is missing from the .env file. Aborting...");
+}
+
+export const DEFENDER_SECRET_KEY: string = process.env.DEFENDER_SECRET_KEY || "";
+if (!DEFENDER_SECRET_KEY) {
+  throw new Error("Defender Secret Key is missing from the .env file. Aborting...");
+}
+
 export const FORKING_BLOCK_NUMMBER: number = 42369566;
 export const apiKeys: Record<string, string> = {
   // Your API key for Etherscan
